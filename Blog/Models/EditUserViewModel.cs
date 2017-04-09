@@ -17,6 +17,6 @@ namespace Blog.Models
         [Compare("Password", ErrorMessage = "Password does not match.")]
         public string ConfirmPassword { get; set; }
 
-        public IList<Role> Roles { get; set; }
+        public List<Role> Roles { get; set; }
     }
 }

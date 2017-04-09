@@ -106,11 +106,11 @@ namespace Blog.Controllers.Admin
 
                     user.Email = viewModel.User.Email;
                     user.FullName = viewModel.User.FullName;
-                    user.UserName = viewModel.User.UserName;
+                    user.UserName = viewModel.User.Email;
                     this.SetUserRoles(viewModel, user, database);
 
                     database.Entry(user).State = EntityState.Modified;
-                    //database.SaveChanges();
+                    database.SaveChanges();
 
 
                     return RedirectToAction("List");
