@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Blog.Controllers.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         // GET: User/List
@@ -109,7 +110,7 @@ namespace Blog.Controllers.Admin
                     this.SetUserRoles(viewModel, user, database);
 
                     database.Entry(user).State = EntityState.Modified;
-                    database.SaveChanges();
+                    //database.SaveChanges();
 
 
                     return RedirectToAction("List");
@@ -117,6 +118,60 @@ namespace Blog.Controllers.Admin
             }
 
             return View(viewModel);
+        }
+
+        // GET: User/Delete
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var database = new BlogDbContext())
+            {
+                var user = database.Users
+                    .Where(u => u.Id == id)
+                    .First();
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(user);
+            }
+        }
+
+        // POST: User/Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var database = new BlogDbContext())
+            {
+                var user = database.Users
+                    .Where(u => u.Id == id)
+                    .First();
+
+                var userArticles = database.Articles
+                    .Where(a => a.Author.Id == user.Id);
+
+                foreach (var article in userArticles)
+                {
+                    database.Articles.Remove(article);
+                }
+
+                database.Users.Remove(user);
+                database.SaveChanges();
+
+                return RedirectToAction("List");
+            }
         }
 
         private void SetUserRoles(EditUserViewModel model, ApplicationUser user, BlogDbContext database)
@@ -139,7 +194,7 @@ namespace Blog.Controllers.Admin
             
         }
 
-        private IList<Role> GetUserRoles(ApplicationUser user, BlogDbContext database)
+        private List<Role> GetUserRoles(ApplicationUser user, BlogDbContext database)
         {
             var userManager = Request
                 .GetOwinContext()
