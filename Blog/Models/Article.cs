@@ -18,13 +18,7 @@ namespace Blog.Models
 
         public string Content { get; set; }
 
-        public DateTime DateAdded
-        {
-            get
-            {
-                return DateTime.Now;
-            }
-        }
+        public DateTime DateAdded { get; set; }
 
         [ForeignKey("Author")]
         public string AuthorId { get; set; }
