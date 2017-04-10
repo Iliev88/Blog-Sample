@@ -15,6 +15,7 @@ namespace Blog.Models
         {
             this.articles = new HashSet<Article>();
         }
+
         [Key]
         public int Id { get; set; }
 
@@ -23,7 +24,17 @@ namespace Blog.Models
         [StringLength(20)]
         public string Name { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Article> Articles
+        {
+            get
+            {
+                return this.articles;
+            }
+            set
+            {
+                this.articles = value;
+            }
+        }
 
 
     }
