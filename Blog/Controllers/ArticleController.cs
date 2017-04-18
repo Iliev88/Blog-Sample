@@ -85,6 +85,8 @@ namespace Blog.Controllers
 
                     var article = new Article(authorId, model.Title, model.Content, model.CategoryId);
 
+                    this.SetArticleTags(article, model, database);
+
                     database.Articles.Add(article);
                     database.SaveChanges();
 
@@ -93,6 +95,29 @@ namespace Blog.Controllers
             }
 
             return View(model);
+        }
+
+        private void SetArticleTags(Article article, ArticleViewModel model, BlogDbContext database)
+        {
+            var tagsStrings = model.Tags
+                .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(t => t.ToLower())
+                .Distinct();
+
+            article.Tags.Clear();
+
+            foreach (var tagString in tagsStrings)
+            {
+                var tag = database.Tags.FirstOrDefault(t => t.Name.Equals(tagString));
+
+                if (tag == null)
+                {
+                    tag = new Tag() { Name = tagString };
+                    database.Tags.Add(tag);
+                }
+
+                article.Tags.Add(tag);
+            }
         }
 
         // GET: Article/Delete
@@ -185,6 +210,7 @@ namespace Blog.Controllers
                 model.Categories = database.Categories
                     .OrderBy(c => c.Name)
                     .ToList();
+                model.Tags = string.Join(", ", article.Tags.Select(t => t.Name));
 
                 return View(model);
             }
