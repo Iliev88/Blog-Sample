@@ -215,6 +215,7 @@ namespace Blog.Controllers
                 model.Categories = database.Categories
                     .OrderBy(c => c.Name)
                     .ToList();
+
                 model.Tags = string.Join(", ", article.Tags.Select(t => t.Name));
 
                 return View(model);
@@ -235,6 +236,7 @@ namespace Blog.Controllers
                     article.Title = model.Title;
                     article.Content = model.Content;
                     article.CategoryId = model.CategoryId;
+                    this.SetArticleTags(article, model, database);
 
                     database.Entry(article).State = EntityState.Modified;
                     database.SaveChanges();
