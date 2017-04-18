@@ -87,6 +87,7 @@ namespace Blog.Controllers
                         .Id;
 
                     var article = new Article(authorId, model.Title, model.Content, model.CategoryId);
+                    article.Date = DateTime.Now;
 
                     this.SetArticleTags(article, model, database);
 

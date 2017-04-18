@@ -16,6 +16,7 @@ namespace Blog.Models
         {
             this.tags = new HashSet<Tag>();
             this.comments = new HashSet<Comment>();
+            this.Date = DateTime.Now;
         }
 
         public Article(string authorId, string title, string content, int categoryId)
@@ -36,6 +37,8 @@ namespace Blog.Models
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime Date { get; set; }
 
         [ForeignKey("Author")]
         public string AuthorId { get; set; }

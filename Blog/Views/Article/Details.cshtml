@@ -14,6 +14,11 @@
         <p>
             @Model.Content
         </p>
+
+        <p>
+            Date Created:
+            @Html.DisplayFor(model => model.Date)
+        </p>
         <div class="col-sm-12">
             
             @foreach (var comment in Model.Comments)
