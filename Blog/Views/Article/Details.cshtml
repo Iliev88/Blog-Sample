@@ -14,6 +14,25 @@
         <p>
             @Model.Content
         </p>
+        <div class="col-sm-12">
+            <hr>
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="well well-sm">
+                    <comment>
+                        <header>
+                            <h4>
+                                @comment.Name (@comment.Email)
+                            </h4>
+                        </header>
+                        <p>@comment.VisitorComment</p>
+                    </comment>
+                </div>
+            }
+            @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
+            <hr>
+        </div>
+
         <small class="author">
             --author @Model.Author.FullName
         </small>

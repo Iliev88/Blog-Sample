@@ -25,5 +25,7 @@ namespace Blog.Models
         {
             return new BlogDbContext();
         }
+
+        public DbSet<Comment> Comments { get; set; }
     }
 }

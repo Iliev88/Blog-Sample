@@ -10,10 +10,12 @@ namespace Blog.Models
     public class Article
     {
         private ICollection<Tag> tags;
+        private ICollection<Comment> comments;
 
         public Article()
         {
             this.tags = new HashSet<Tag>();
+            this.comments = new HashSet<Comment>();
         }
 
         public Article(string authorId, string title, string content, int categoryId)
@@ -23,6 +25,7 @@ namespace Blog.Models
             this.Content = content;
             this.CategoryId = categoryId;
             this.tags = new HashSet<Tag>();
+            this.comments = new HashSet<Comment>();
         }
 
         [Key]
@@ -55,5 +58,10 @@ namespace Blog.Models
             set { this.tags = value; }
         }
         
+        public virtual ICollection<Comment> Comments
+        {
+            get { return this.comments; }
+            set { this.comments = value; }
+        }
     }
 }
