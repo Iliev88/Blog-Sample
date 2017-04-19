@@ -29,6 +29,11 @@ namespace Blog.Migrations
                 this.CreateUser(context, "admin@admin.com", "Admin", "123");
                 this.SetRoleToUser(context, "admin@admin.com", "Admin");
             }
+
+            if (!context.Categories.Any())
+            {
+                this.CreateCategory(context, "Default");
+            }
         }
 
         private void SetRoleToUser(BlogDbContext context, string email, string role)
@@ -85,6 +90,20 @@ namespace Blog.Migrations
             if (!result.Succeeded)
             {
                 throw new Exception(string.Join(";", result.Errors));
+            }
+        }
+
+        private void CreateCategory(BlogDbContext context, string name)
+        {
+            if (!context.Categories.Any())
+            {
+                var category = new Category
+                {
+                    Name = name,
+                };
+
+                context.Categories.Add(category);
+                context.SaveChanges();
             }
         }
     }
