@@ -71,16 +71,15 @@ namespace Blog.Controllers
         }
 
         // POST: Comment/Create
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Email,VisitorComment,ArticleId")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-
                 database.Comments.Add(comment);
                 database.SaveChanges();
+
                 return RedirectToAction("ListCommentsOnArticle", new { id = comment.ArticleId });
             }
 

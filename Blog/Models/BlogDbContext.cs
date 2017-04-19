@@ -6,8 +6,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Blog.Models
 {
-    
-
     public class BlogDbContext : IdentityDbContext<ApplicationUser>
     {
         public BlogDbContext()

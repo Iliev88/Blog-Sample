@@ -15,7 +15,7 @@ namespace Blog.Models
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-
+        
         [MaxLength(50)]
         public string Email { get; set; }
 
