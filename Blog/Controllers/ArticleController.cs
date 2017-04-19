@@ -38,7 +38,7 @@ namespace Blog.Controllers
             if (id == null)
             {
                 this.AddNotification("No article ID provided.", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("List");
             }
 
             using (var database = new BlogDbContext())
@@ -53,7 +53,7 @@ namespace Blog.Controllers
                 if (article == null)
                 {
                     this.AddNotification("Such an article does not exist", NotificationType.ERROR);
-                    return HttpNotFound();
+                    return RedirectToAction("List");
                 }
 
                 return View(article);
@@ -98,7 +98,7 @@ namespace Blog.Controllers
                     database.SaveChanges();
 
                     this.AddNotification("Article was successfully created.", NotificationType.SUCCESS);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("List");
                 }
             }
 
@@ -134,7 +134,7 @@ namespace Blog.Controllers
             if (id == null)
             {
                 this.AddNotification("No article ID provided.", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("List");
             }
 
             using (var database = new BlogDbContext())
@@ -148,7 +148,7 @@ namespace Blog.Controllers
                 if (!IsUserAuthorizedToEdit(article))
                 {
                     this.AddNotification("You have no rights to perform that!", NotificationType.ERROR);
-                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    return RedirectToAction("List");
                 }
 
                 ViewBag.TagsString = string.Join(", ", article.Tags.Select(t => t.Name));
@@ -156,7 +156,7 @@ namespace Blog.Controllers
                 if  (article == null)
                 {
                     this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
-                    return HttpNotFound();
+                    return RedirectToAction("List");
                 }
 
                 return View(article);
@@ -171,7 +171,7 @@ namespace Blog.Controllers
             if (id == null)
             {
                 this.AddNotification("No article ID provided.", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("List");
             }
 
             using (var database = new BlogDbContext())
@@ -184,14 +184,14 @@ namespace Blog.Controllers
                 if (article == null)
                 {
                     this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
-                    return HttpNotFound();
+                    return RedirectToAction("List");
                 }
 
                 database.Articles.Remove(article);
                 database.SaveChanges();
 
                 this.AddNotification("The article was deleted.", NotificationType.SUCCESS);
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
         }
 
@@ -201,7 +201,7 @@ namespace Blog.Controllers
             if (id == null)
             {
                 this.AddNotification("No article ID provided.", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("List");
             }
 
             using (var database = new BlogDbContext())
@@ -213,13 +213,13 @@ namespace Blog.Controllers
                 if (!IsUserAuthorizedToEdit(article))
                 {
                     this.AddNotification("You have no rights to perform that!", NotificationType.ERROR);
-                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    return RedirectToAction("List");
                 }
 
                 if (article == null)
                 {
                     this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
-                    return HttpNotFound();
+                    return RedirectToAction("List");
                 }
 
                 var model = new ArticleViewModel();
@@ -256,12 +256,11 @@ namespace Blog.Controllers
                     database.Entry(article).State = EntityState.Modified;
                     database.SaveChanges();
 
-                    this.AddNotification("Article successfully edited.", NotificationType.SUCCESS);
-                    return RedirectToAction("Index");
+                    this.AddNotification("Article was edited.", NotificationType.SUCCESS);
+                    return RedirectToAction("List");
                 }
             }
-
-            //this.AddNotification("Article successfully edited.", NotificationType.SUCCESS);
+            
             return View(model);
         }
 
