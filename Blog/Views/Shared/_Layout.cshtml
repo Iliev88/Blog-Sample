@@ -24,9 +24,11 @@
         </div>
     </div>
     <div class="container body-content">
+        <div class="container">@Html.Partial("_Notifications")</div>
+
         @RenderBody()
         <footer class="pull-right">
-            <p>&copy; @DateTime.Now.Year - Malina's Cooking Blog</p>
+            <p>&copy; @DateTime.Now.Year - Malina's Cooking Blog </p>
         </footer>
     </div>
 

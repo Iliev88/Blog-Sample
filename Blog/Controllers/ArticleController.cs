@@ -1,4 +1,5 @@
-﻿using Blog.Models;
+﻿using Blog.Extensions;
+using Blog.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -36,6 +37,7 @@ namespace Blog.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("No article ID provided.", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -50,6 +52,7 @@ namespace Blog.Controllers
 
                 if (article == null)
                 {
+                    this.AddNotification("Such an article does not exist", NotificationType.ERROR);
                     return HttpNotFound();
                 }
 
@@ -94,6 +97,7 @@ namespace Blog.Controllers
                     database.Articles.Add(article);
                     database.SaveChanges();
 
+                    this.AddNotification("Article was successfully created.", NotificationType.SUCCESS);
                     return RedirectToAction("Index");
                 }
             }
@@ -129,6 +133,7 @@ namespace Blog.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("No article ID provided.", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -142,6 +147,7 @@ namespace Blog.Controllers
 
                 if (!IsUserAuthorizedToEdit(article))
                 {
+                    this.AddNotification("You have no rights to perform that!", NotificationType.ERROR);
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
 
@@ -149,6 +155,7 @@ namespace Blog.Controllers
 
                 if  (article == null)
                 {
+                    this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
                     return HttpNotFound();
                 }
 
@@ -163,6 +170,7 @@ namespace Blog.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("No article ID provided.", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -175,12 +183,14 @@ namespace Blog.Controllers
 
                 if (article == null)
                 {
+                    this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
                     return HttpNotFound();
                 }
 
                 database.Articles.Remove(article);
                 database.SaveChanges();
 
+                this.AddNotification("The article was deleted.", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
         }
@@ -190,6 +200,7 @@ namespace Blog.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("No article ID provided.", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -201,11 +212,13 @@ namespace Blog.Controllers
 
                 if (!IsUserAuthorizedToEdit(article))
                 {
+                    this.AddNotification("You have no rights to perform that!", NotificationType.ERROR);
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
 
                 if (article == null)
                 {
+                    this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
                     return HttpNotFound();
                 }
 
@@ -243,10 +256,12 @@ namespace Blog.Controllers
                     database.Entry(article).State = EntityState.Modified;
                     database.SaveChanges();
 
+                    this.AddNotification("Article successfully edited.", NotificationType.SUCCESS);
                     return RedirectToAction("Index");
                 }
             }
 
+            //this.AddNotification("Article successfully edited.", NotificationType.SUCCESS);
             return View(model);
         }
 
