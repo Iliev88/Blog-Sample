@@ -18,7 +18,7 @@
                     </header>
 
                     <p>
-                        @article.Content.Substring(0, 350)...
+                        @article.Content.Substring(0, @article.Content.Length / 2)...
                         @Html.ActionLink("Read full article", "Details", "Article", new { @id = article.Id }, null)
                     </p>
 
