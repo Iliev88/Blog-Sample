@@ -1457,7 +1457,7 @@ dd {
     width: 160px;
     overflow: hidden;
     clear: left;
-    text-align: right;
+    text-align: justify;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -2255,10 +2255,10 @@ caption {
   padding-top: 8px;
   padding-bottom: 8px;
   color: #777;
-  text-align: left;
+  text-align: justify;
 }
 th {
-  text-align: left;
+  text-align: justify;
 }
 .table {
   width: 100%;

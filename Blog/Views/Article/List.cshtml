@@ -18,7 +18,8 @@
                     </header>
 
                     <p>
-                        @article.Content.Substring(0, 250)...
+                        @article.Content.Substring(0, 350)...
+                        @Html.ActionLink("Read full article", "Details", "Article", new { @id = article.Id }, null)
                     </p>
 
                     <footer>
