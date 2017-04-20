@@ -79,7 +79,7 @@ namespace Blog.Controllers
             {
                 database.Comments.Add(comment);
                 database.SaveChanges();
-
+                
                 return RedirectToAction("ListCommentsOnArticle", new { id = comment.ArticleId });
             }
 

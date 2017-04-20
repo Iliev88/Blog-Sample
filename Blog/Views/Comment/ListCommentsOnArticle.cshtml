@@ -10,17 +10,19 @@
     </div>
     <br>
     <div class="col-sm-12">
+        <article>
         <div class="text-center">
-            <br>
-            @foreach (var tag in Model.Tags)
-            {
-                <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
-            }
+            <div class="container">
+                <h2>@Model.Title</h2>
+            </div>
+            <div class="container">
+                @Model.Content
+            </div>
         </div>
+            <hr>
+        </article>
     </div>
-    <div class="container">
-        @Model.Content
-    </div>
+    
     <hr>
 
     <div class="container">
