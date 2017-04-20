@@ -41,8 +41,8 @@ namespace Blog.Controllers
                 var articles = database.Articles
                     .Include(a => a.Author)
                     .Include(a => a.Tags)
-                    .Take(4)
                     .OrderByDescending(a => a.Date)
+                    .Take(4)
                     .ToList();
 
                 return View(articles);
