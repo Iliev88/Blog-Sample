@@ -28,7 +28,7 @@ namespace Blog.Controllers
                     .Include(a => a.Tags)
                     .OrderByDescending(a => a.Date)
                     .ToList();
-                
+
                 return View(articles);
             }
         }
@@ -117,6 +117,7 @@ namespace Blog.Controllers
                     this.AddNotification("Article was successfully created.", NotificationType.SUCCESS);
                     return RedirectToAction("List");
                 }
+
             }
 
             return View(model);
@@ -170,7 +171,7 @@ namespace Blog.Controllers
 
                 ViewBag.TagsString = string.Join(", ", article.Tags.Select(t => t.Name));
 
-                if  (article == null)
+                if (article == null)
                 {
                     this.AddNotification("Such an article does not exist.", NotificationType.ERROR);
                     return RedirectToAction("List");
@@ -277,7 +278,7 @@ namespace Blog.Controllers
                     return RedirectToAction("List");
                 }
             }
-            
+
             return View(model);
         }
 
