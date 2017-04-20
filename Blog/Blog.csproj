@@ -298,6 +298,7 @@
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Comment\ListCommentsOnArticle.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Article\ListLast.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

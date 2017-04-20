@@ -15,7 +15,7 @@ namespace Blog.Controllers
         // GET: Article
         public ActionResult Index()
         {
-            return RedirectToAction("List");
+            return RedirectToAction("ListLast");
         }
 
         // GET: Article/List
@@ -26,9 +26,25 @@ namespace Blog.Controllers
                 var articles = database.Articles
                     .Include(a => a.Author)
                     .Include(a => a.Tags)
-                    .Take(4)
+                    .OrderByDescending(a => a.Date)
                     .ToList();
                 
+                return View(articles);
+            }
+        }
+
+        // GET: Article/List Last 4
+        public ActionResult ListLast()
+        {
+            using (var database = new BlogDbContext())
+            {
+                var articles = database.Articles
+                    .Include(a => a.Author)
+                    .Include(a => a.Tags)
+                    .Take(4)
+                    .OrderByDescending(a => a.Date)
+                    .ToList();
+
                 return View(articles);
             }
         }
