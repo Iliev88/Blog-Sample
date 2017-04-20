@@ -17,7 +17,7 @@
             </li>
         }
         <li>
-            @Html.ActionLink("Create Article", "Create", "Article");
+            @Html.ActionLink("Create Article", "Create", "Article")
         </li>
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
