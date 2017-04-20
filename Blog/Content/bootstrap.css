@@ -4324,7 +4324,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin: 7.5px -15px;
 }
 .navbar-nav > li > a {
-  padding-top: 50px;
+  padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
 }
@@ -4360,7 +4360,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 50px;
+    padding-top: 15px;
     padding-bottom: 15px;
   }
 }
@@ -4436,7 +4436,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar-form {
     width: auto;
-    padding-top: ;
+    padding-top: 0;
     padding-bottom: 0;
     margin-right: 0;
     margin-left: 0;
@@ -6481,9 +6481,7 @@ button.close {
 .navbar-header:before,
 .navbar-header:after,
 .navbar-collapse:before,
-.navbar-collapse:after{
-    padding-top: 50px;
-}
+.navbar-collapse:after,
 .pager:before,
 .pager:after,
 .panel-body:before,

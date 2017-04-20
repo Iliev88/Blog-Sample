@@ -27,7 +27,7 @@ namespace Blog.Controllers
                     .Include(a => a.Author)
                     .Include(a => a.Tags)
                     .ToList();
-
+                
                 return View(articles);
             }
         }
