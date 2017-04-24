@@ -13,14 +13,16 @@ namespace Blog.Models
 
         [Required]
         [StringLength(50)]
+        [DisplayName("Title *")]
         public string Title { get; set; }
         
         [Required]
+        [DisplayName("Content *")]
         public string Content { get; set; }
 
         public string AuthorId { get; set; }
 
-        [DisplayName("Category")]
+        [DisplayName("Category *")]
         public int CategoryId { get; set; }
 
         public ICollection<Article> Articles { get; set; }
@@ -28,6 +30,7 @@ namespace Blog.Models
         public List<Category> Categories { get; set; }
 
         [Required]
+        [DisplayName("Tags *")]
         public string Tags { get; set; }
     }
 }

@@ -16,7 +16,9 @@ namespace Blog.Controllers
         // GET: Comment
         public ActionResult Index()
         {
-            var comments = database.Comments.Include(c => c.Article);
+            var comments = database.Comments
+                .Include(c => c.Article)
+                .OrderByDescending(c => c.Date);
 
             return View(comments.ToList());
         }
