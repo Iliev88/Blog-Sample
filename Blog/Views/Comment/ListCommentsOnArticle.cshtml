@@ -3,57 +3,49 @@
 @{
     ViewBag.Title = "Details";
 }
-<br>
+
 <div class="container">
-    <div class="well">
-        
-    </div>
-    <br>
     <div class="col-sm-12">
         <article>
-        <div class="text-center">
-            <div class="container">
-                <h2>@Model.Title</h2>
+            <div class="text-center">
+                <div class="container">
+                    <h2>@Model.Title</h2>
+                </div>
+                <div class="container">
+                    @Model.Content
+                </div>
             </div>
-            <div class="container">
-                @Model.Content
-            </div>
-        </div>
-            <hr>
+            <br />
+            <comments>
+                @foreach (var comment in Model.Comments)
+            {
+                    <div class="well">
+
+                        <header>
+                            <h4>
+                                @comment.Name
+                                @comment.Email
+                            </h4>
+                        </header>
+                        <p>
+                            @comment.VisitorComment
+                        </p>
+                        <p>
+                            <i>Commented on: </i>@comment.Date
+                        </p>
+
+                    </div>
+                }
+                @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
+                @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+            {
+                    @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                    @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+                }
+                <hr>
+            </comments>
         </article>
     </div>
-    
-    <hr>
 
-    <div class="container">
-        <comments>
-            @foreach (var comment in Model.Comments)
-            {
-                <div class="well">
-
-                    <header>
-                        <h4>
-                            @comment.Name
-                            @comment.Email
-                        </h4>
-                    </header>
-                    <p>
-                        @comment.VisitorComment
-                    </p>
-                    <p>
-                        <i>Commented on: </i>@comment.Date
-                    </p>
-
-                </div>
-            }
-            @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
-            @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
-            {
-                @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
-                @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
-            }
-            <hr>
-        </comments>
-    </div>
 </div>
 

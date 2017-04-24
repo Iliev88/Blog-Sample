@@ -39,7 +39,9 @@
                     <input type="submit" value="Submit" class="btn btn-success" />
                 </div>
             </div>
-
+            <div>
+                <p><i>The fields marked with * are required.</i></p>
+            </div>
         }
         <div class="pull-right">
             @Html.ActionLink("Back", "ListCommentsOnArticle", "Comment", new { @id = Model.ArticleId }, null)

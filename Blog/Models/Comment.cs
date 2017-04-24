@@ -19,13 +19,14 @@ namespace Blog.Models
 
         [Required]
         [MaxLength(50)]
+        [Display(Name = "Name *")]
         public string Name { get; set; }
         
         [MaxLength(50)]
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Comment")]
+        [Display(Name = "Comment *")]
         public string VisitorComment { get; set; }
 
         public DateTime Date { get; set; }
