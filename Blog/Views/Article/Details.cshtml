@@ -34,6 +34,13 @@
                         </header>
                         <p>@comment.VisitorComment</p>
                         <i>Commented on: </i>@comment.Date
+                        <footer class="pull-right">
+                            @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+                            {
+                                @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+                            }
+                        </footer>
                     </comment>
                 </div>
             }
