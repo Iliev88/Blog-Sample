@@ -9,6 +9,11 @@ namespace Blog.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            this.Date = DateTime.Now;
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -22,6 +27,8 @@ namespace Blog.Models
         [Required]
         [Display(Name = "Comment")]
         public string VisitorComment { get; set; }
+
+        public DateTime Date { get; set; }
 
         [Required]
         [ForeignKey("Article")]

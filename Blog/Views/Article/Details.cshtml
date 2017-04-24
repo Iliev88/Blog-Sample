@@ -16,7 +16,7 @@
         </p>
 
         <p>
-            Date Created:
+            <i>Date Created:</i>
             @Html.DisplayFor(model => model.Date)
         </p>
         <div class="col-sm-12">
@@ -31,6 +31,7 @@
                             </h4>
                         </header>
                         <p>@comment.VisitorComment</p>
+                        <i>Commented on: </i>@comment.Date
                     </comment>
                 </div>
             }
@@ -39,7 +40,7 @@
         </div>
 
         <small class="author">
-            --author @Model.Author.FullName
+            <i>Created by:</i> @Model.Author.FullName
         </small>
         <footer class="pull-right">
             @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
