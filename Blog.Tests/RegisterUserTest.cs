@@ -34,5 +34,28 @@ namespace Blog.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void EmailTestValid()
+        {
+            var user = new RegisterViewModel();
+            user.Email = "iliya@abv.bg";
+            var expected = "iliya@abv.bg";
+
+            var actual = user.Email;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void EmailTestMissing()
+        {
+            var user = new RegisterViewModel();
+            var expected = "iliya@abv.bg";
+
+            var actual = user.Email;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
